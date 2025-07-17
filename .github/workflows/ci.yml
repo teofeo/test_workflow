@@ -1,0 +1,28 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        name : Build and Test
+        steps:
+          - name: Build
+            run: echo "Building the project..."
+
+    test:
+        runs-on: ubuntu-latest
+        name: Run Tests
+        steps:
+          - name: Test
+            run: echo "Running tests..."
+    
+    deploy:
+        runs-on: ubuntu-latest
+        name: Deploy to Production
+        if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+        steps:
+          - name: Deploy
+            run: echo "Deploying to production..."
